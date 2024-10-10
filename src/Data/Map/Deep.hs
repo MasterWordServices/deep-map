@@ -467,8 +467,8 @@ import Prelude hiding
   )
 
 data DeepMap (ks :: [Type]) (v :: Type) :: Type where
-  Bare :: {getBare :: v} -> DeepMap '[] v
-  Nest :: (Ord k) => {getNest :: Map k (DeepMap ks v)} -> DeepMap (k ': ks) v
+  Bare :: {getBare :: !v} -> DeepMap '[] v
+  Nest :: (Ord k) => {getNest :: !(Map k (DeepMap ks v))} -> DeepMap (k ': ks) v
 
 instance (Eq v) => Eq (DeepMap '[] v) where
   (==) :: (Eq v) => DeepMap '[] v -> DeepMap '[] v -> Bool
